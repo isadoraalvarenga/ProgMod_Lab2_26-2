@@ -58,8 +58,8 @@ public class Analista extends Funcionario {
 	 * @return valor das horas extras
 	 */
 	private double valorHorasExtras() {
-		//TODO
-		return 0;
+
+		return horasExtras*(FRACAO_HORA*SALARIO_ANALISTA);
 	}
 
 	/**
@@ -80,8 +80,12 @@ public class Analista extends Funcionario {
 	 * @return valor total pago ao analista
 	 */
 	public double registrarPagamento() {
-		//TODO
-		return 0;
+		
+		double pagar = 0;
+		pagar = valorHorasExtras()+SALARIO_ANALISTA;
+		horasExtras = 0;
+
+		return pagar;
 	}
 
 	/**
