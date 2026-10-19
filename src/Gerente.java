@@ -63,10 +63,22 @@ public class Gerente extends Funcionario {
 	 * @return valor total do bônus
 	 */
 	private double valorBonus() {
-		//TODO
-		return 0;
+		
+		int projetosTerminados = 0;
+		for(int i = 0; i<projetos.size();i++){
+			if(projetofinalizado(projetos.get(i)) && projetos.get(i).diasAposFinalizacao()<=TEMPO_BONUS){
+				projetosTerminados++;
+			} 
+		}
+		return projetosTerminados*(SALARIO_GERENTE*BONUS_PROJETO);
 	}
 
+	private boolean projetofinalizado(Projeto projeto){
+		boolean resposta = true;
+		if (-1== projeto.diasAposFinalizacao()) resposta = false;
+		return resposta;
+	}
+ 
 	/**
 	 * Aloca um novo projeto ao gerente, segundo as regras da empresa.
 	 *
@@ -74,8 +86,14 @@ public class Gerente extends Funcionario {
 	 * @return código de resultado da operação
 	 */
 	public int alocarProjeto(Projeto projeto) {
-		//TODO
-		return 0;
+		boolean pode = true;
+		for(int i = 0; i<projetos.size();i++){
+			if(projetofinalizado(projetos.get(i))) pode = false; 
+		}
+		if (pode){
+			projetos.add(projeto);
+		}
+		return projetos.size();
 	}
 
 	/**
